@@ -1,4 +1,10 @@
+
 var builder = WebApplication.CreateBuilder(args);
+
+const string CONNECTIONNAME = "ApiNetdb";
+var connectionString = builder.Configuration.GetConnectionString(CONNECTIONNAME);
+
+builder.Services.AddDbContext<ApiDbContext>(Options => Options.UseSqlServer(connectionString));
 
 // Add services to the container.
 
