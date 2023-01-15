@@ -2,11 +2,31 @@
 
 public class ApiDbContext: DbContext
 {
-    public ApiDbContext(DbContextOptions<ApiDbContext> options) : base(options)
-    {
+    private readonly ILoggerFactory _loggerFactory;
 
+    public ApiDbContext(DbContextOptions<ApiDbContext> options, ILoggerFactory loggerFactory) : base(options)
+    {
+        _loggerFactory = loggerFactory;
     }
 
     public DbSet<User>? Users { get; set; }
+    public DbSet<Course>? Courses { get; set; }
+    public DbSet<Chapter>? Chapters { get; set; }
+    public DbSet<Category>? Categories { get; set; }
+    public DbSet<Student>? Students { get; set; }
 
-}
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        var logger = _loggerFactory.CreateLogger<ApiDbContext>();
+
+        //Mostrar todos los mensajes
+        optionsBuilder.LogTo(d => logger.Log(LogLevel.Information, d, new[] { DbLoggerCategory.Database.Name }));
+        optionsBuilder.EnableSensitiveDataLogging();
+
+        //    // Filtrar los log solo por Información
+        //    optionsBuilder.LogTo(d => logger.Log(LogLevel.Information, d, new[] { DbLoggerCategory.Database.Name }), LogLevel.Information)
+        //        .EnableSensitiveDataLogging()
+        //        .EnableDetailedErrors();
+        }
+    }
+
