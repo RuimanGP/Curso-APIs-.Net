@@ -43,24 +43,22 @@ internal class Services
             {
                 FirstName ="Martin",
                 LastName = "Herrera",
-                Dob = new DateTime(2010, 5, 28),
+               // Dob = new DateTime(2010, 5, 28),
 
             },
             new Student()
             {
                 FirstName = "Ana",
                 LastName = "Gomez",
-                Dob = new DateTime(2000, 2, 13),
+                //Dob = new DateTime(2000, 2, 13),
 
             },
             new Student()
             {
                 FirstName = "Marta",
                 LastName = "Charcon",
-                Dob = new DateTime(2005, 1, 30),
+                //Dob = new DateTime(2005, 1, 30),
             }
         };
-
-
     }
 }
