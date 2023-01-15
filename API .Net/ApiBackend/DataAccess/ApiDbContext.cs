@@ -18,15 +18,10 @@ public class ApiDbContext: DbContext
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         var logger = _loggerFactory.CreateLogger<ApiDbContext>();
-
-        //Mostrar todos los mensajes
-        optionsBuilder.LogTo(d => logger.Log(LogLevel.Information, d, new[] { DbLoggerCategory.Database.Name }));
-        optionsBuilder.EnableSensitiveDataLogging();
-
-        //    // Filtrar los log solo por Información
-        //    optionsBuilder.LogTo(d => logger.Log(LogLevel.Information, d, new[] { DbLoggerCategory.Database.Name }), LogLevel.Information)
-        //        .EnableSensitiveDataLogging()
-        //        .EnableDetailedErrors();
-        }
+        
+        optionsBuilder.LogTo(d => logger.Log(LogLevel.Information, d, new[] { DbLoggerCategory.Database.Name }), LogLevel.Information)
+            .EnableSensitiveDataLogging()
+            .EnableDetailedErrors();
     }
+}
 
